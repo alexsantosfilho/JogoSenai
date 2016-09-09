@@ -5,9 +5,13 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "MyProject8",
+			"Name": "PrimeiroCodigo",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"AIModule"
+			]
 		}
 	]
 }
