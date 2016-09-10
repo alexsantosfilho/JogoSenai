@@ -28,6 +28,10 @@ public:
 
 	FORCEINLINE int GetNewLife() const { return Life; }
 	FORCEINLINE void AMyCharacter::SetNewLife(int NewLife) { Life = NewLife; }
+	void OnDeath1();
+
+	void SetColetavel(int NewColetavel);
+	int GetColetavel();
 
 	void OnDeath();
 
@@ -42,6 +46,9 @@ private:
 		UArrowComponent* ArrowComp;
 	UPROPERTY(EditAnywhere)
 		int Life = 100;
+
+
+	int Coletavel = 0;
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);

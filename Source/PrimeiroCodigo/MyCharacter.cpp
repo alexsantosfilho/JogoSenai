@@ -89,6 +89,15 @@ int AMyCharacter::GetLife() {
 	return Life;
 }
 
+
+void AMyCharacter::SetColetavel(int NewColetavel) {
+	Coletavel = NewColetavel;
+
+}
+int AMyCharacter::GetColetavel() {
+	return Coletavel;
+}
+
 void AMyCharacter::OnDeath() {
 	if (Life <= 0) {
 		FVector InitialLocation(-60.0f, 30.0f, 350.0f);
@@ -97,6 +106,15 @@ void AMyCharacter::OnDeath() {
 	}
 }
 
+
+void AMyCharacter::OnDeath1() {
+	if (Coletavel <= 0) {
+		FVector InitialLocation(-3426.8f, 89.0f, 128.0f);
+		Coletavel = 10;
+		SetActorLocation(InitialLocation);
+	}
+
+}
 void AMyCharacter::DropProjectile() {
 	FActorSpawnParameters SpawnParameters;
 	UWorld* World = GetWorld();
