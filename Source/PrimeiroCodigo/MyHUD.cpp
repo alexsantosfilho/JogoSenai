@@ -32,12 +32,12 @@ void AMyHUD::DrawHUD() {
 
 	FString LifeString = FString::Printf(TEXT("Life: %d"),
 		MyCharacter->GetLife());
-	DrawText(LifeString, FColor::Red, 50, 50, HUDFont);
+	DrawText(LifeString, FColor::Red, 472, 340, HUDFont);
 
-	DrawTextureSimple(MyTexture, 200, 50, 1.0f, false);
+	DrawTextureSimple(MyTexture, 530, 340, 1.0f, false);
 
-	DrawTexture(MyTexture, 200, 200, MyCharacter->GetLife()*4,
-		MyTexture->GetSizeY(), 0, 0, MyCharacter->GetLife()*4,
+	DrawTexture(MyTexture, 530, 400, MyCharacter->GetLife()*2,
+		MyTexture->GetSizeY(), 0, 0, MyCharacter->GetLife()*2,
 		MyTexture->GetSizeY(), FLinearColor::White,
 		EBlendMode::BLEND_Translucent, 1.0f, false, 0.0f,
 		FVector2D::ZeroVector);
