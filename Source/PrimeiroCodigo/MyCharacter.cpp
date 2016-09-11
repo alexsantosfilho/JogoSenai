@@ -74,11 +74,11 @@ void AMyCharacter::MoveRight(float Value) {
 }
 
 void AMyCharacter::StartRun() {
-	GetCharacterMovement()->MaxWalkSpeed = 800;
+	GetCharacterMovement()->MaxWalkSpeed = 2000;
 }
 
 void AMyCharacter::StopRun() {
-	GetCharacterMovement()->MaxWalkSpeed = 400;
+	GetCharacterMovement()->MaxWalkSpeed = 1000;
 }
 
 void AMyCharacter::SetLife(int NewLife) {

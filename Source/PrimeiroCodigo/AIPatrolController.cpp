@@ -17,7 +17,7 @@ AAIPatrolController::AAIPatrolController()
 	/* Initialize blackboard and behavior Tree*/
 
 	BehaviorComp = CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviorComp"));
-	Blackboard = CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackboardComp"));
+	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackboardComp"));
 
 	/* Initialize blackboard Keys*/
 	PlayerKey = "Target";
@@ -53,7 +53,7 @@ void AAIPatrolController::Possess(APawn * Pawn)
 
 
 			if (AICharacter->BehaviorTree->BlackboardAsset) {
-				BlackboardComp->InitializeBlackboard(*(AICharacter->BehaviorTree->BlackboardAsset));
+				BlackboardComp->InitializeBlackboard((*AICharacter->BehaviorTree->BlackboardAsset));
 		}
 
 			/* Populate patrol point array*/
