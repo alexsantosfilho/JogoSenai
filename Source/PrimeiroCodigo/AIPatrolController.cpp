@@ -3,6 +3,7 @@
 #include "PrimeiroCodigo.h"
 #include "AIPatrolController.h"
 #include "AIPatrol.h"
+#include "AICharacter.h"
 #include "AIPatrolPoint.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
@@ -25,9 +26,6 @@ AAIPatrolController::AAIPatrolController()
 	CurrentPatrolPont = 0;
 
 
-
-
-
 }
 
 void AAIPatrolController::SetPlayerCaught(APawn * Pawn)
@@ -48,6 +46,8 @@ void AAIPatrolController::Possess(APawn * Pawn)
 	/* Get reference to the Character*/
 
 	AAIPatrol* AICharacter = Cast<AAIPatrol>(Pawn);
+
+
 
 		if (AICharacter) {
 

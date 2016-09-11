@@ -30,11 +30,11 @@ void AAIPatrol::BeginPlay()
 }
 
 // Called every frame
-void AAIPatrol::Tick( float DeltaTime )
-{
-	Super::Tick( DeltaTime );
+//void AAIPatrol::Tick( float DeltaTime )
+//{
+	//Super::Tick( DeltaTime );
 
-}
+//}
 
 // Called to bind functionality to input
 void AAIPatrol::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -52,7 +52,7 @@ void AAIPatrol::OnPlayerCaught(APawn * Pawn)
 	if (AIController)
 
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("yoy have caught"));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Vc encostou"));
 		AIController->SetPlayerCaught(Pawn);
 	}
 }

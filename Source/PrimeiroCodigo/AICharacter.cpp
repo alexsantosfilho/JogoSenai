@@ -23,11 +23,11 @@ void AAICharacter::BeginPlay()
 }
 
 // Called every frame
-void AAICharacter::Tick( float DeltaTime )
-{
-	Super::Tick( DeltaTime );
+//void AAICharacter::Tick( float DeltaTime )
+//{
+	//Super::Tick( DeltaTime );
 
-}
+//}
 
 // Called to bind functionality to input
 void AAICharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
