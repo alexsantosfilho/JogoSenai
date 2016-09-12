@@ -59,7 +59,7 @@ void AAIPatrol::OnPlayerCaught(APawn * Pawn)
 	if (AIController)
 
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("yoy have caught"));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("vc esta sendo seguido"));
 		AIController->SetPlayerCaught(Pawn);
 	}
 }
