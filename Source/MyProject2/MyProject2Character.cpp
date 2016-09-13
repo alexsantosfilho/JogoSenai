@@ -4,6 +4,7 @@
 #include "MyProject2Character.h"
 #include "ProjectActor.h"
 #include "Inimigo.h"
+#include "AIPatrol.h"
 
 
 
@@ -171,3 +172,18 @@ void AMyProject2Character::MoveRight(float Value)
 	}
 }
 
+void AMyProject2Character::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+
+
+	if ((OtherActor != nullptr) && (OtherActor != this) &&
+		(OtherComp != nullptr) && (OtherActor->IsA(AProjectActor::StaticClass()))) {
+
+		AProjectActor* MyProject2Character = Cast<AProjectActor>(OtherActor);
+
+		UE_LOG(LogTemp, Warning, TEXT("Destruiu Parwwwwwwwabens"));
+		Destroy();
+
+	}
+
+
+}

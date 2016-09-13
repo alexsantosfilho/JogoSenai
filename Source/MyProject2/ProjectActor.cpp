@@ -3,6 +3,8 @@
 #include "MyProject2.h"
 #include "ProjectActor.h"
 #include "MyProject2Character.h"
+#include "AIPatrol.h"
+
 
 
 
@@ -22,7 +24,7 @@ AProjectActor::AProjectActor()
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetCollisionProfileName("NoCollision");
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>
-		Mesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_WideCapsule.Shape_WideCapsule'"));
+		Mesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Sphere.Shape_Sphere'"));
 	if (Mesh.Succeeded()) {
 		MeshComp->SetStaticMesh(Mesh.Object);
 	}
@@ -34,7 +36,7 @@ AProjectActor::AProjectActor()
 		(TEXT("Particle"));
 	Particle->bAutoActivate = true;
 	static ConstructorHelpers::FObjectFinder<UParticleSystem>
-		ParticleSystem(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Fire.P_Fire'"));
+		ParticleSystem(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Explosion.P_Explosion'"));
 	if (ParticleSystem.Succeeded()) {
 		Particle->SetTemplate(ParticleSystem.Object);
 	}
@@ -80,6 +82,16 @@ void AProjectActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 		AProjectActor* MyProject2Character = Cast<AProjectActor>(OtherActor);
 
 		UE_LOG(LogTemp, Warning, TEXT("Destruiu Parabens"));
+		Destroy();
+
+	}
+
+	if ((OtherActor != nullptr) && (OtherActor != this) &&
+		(OtherComp != nullptr) && (OtherActor->IsA(AAIPatrol::StaticClass()))) {
+
+		AAIPatrol* MyProject2Character = Cast<AAIPatrol>(OtherActor);
+
+		UE_LOG(LogTemp, Warning, TEXT("Destruiu Parabens a bola"));
 		Destroy();
 
 	}

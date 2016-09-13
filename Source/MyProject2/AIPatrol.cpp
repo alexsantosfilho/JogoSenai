@@ -71,4 +71,16 @@ void AAIPatrol::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 		Destroy();
 		UE_LOG(LogTemp, Warning, TEXT("NORMAL"));
 	}
+
+
+	if ((OtherActor != nullptr) && (OtherActor != this) &&
+		(OtherComp != nullptr) && (OtherActor->IsA(AAIPatrol::StaticClass()))) {
+
+		AAIPatrol* MyProject2Character = Cast<AAIPatrol>(OtherActor);
+
+		UE_LOG(LogTemp, Warning, TEXT("Destruiu Parabens o personagem"));
+		Destroy();
+
+	}
+
 }
