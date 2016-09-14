@@ -19,12 +19,16 @@ AProjectActor::AProjectActor()
 	Root->bGenerateOverlapEvents = true;
 	Root->OnComponentBeginOverlap.AddDynamic(this, &AProjectActor::OnOverlapBegin);
 
+
+
+//	this->OnActorHit.AddDynamic(this, &AProjectActor::OnHit);
+
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetCollisionProfileName("NoCollision");
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>
-		Mesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Sphere.Shape_Sphere'"));
+		Mesh(TEXT("StaticMesh'/Game/Shape_WideCapsule.Shape_WideCapsule'"));
 	if (Mesh.Succeeded()) {
 		MeshComp->SetStaticMesh(Mesh.Object);
 	}
@@ -36,7 +40,7 @@ AProjectActor::AProjectActor()
 		(TEXT("Particle"));
 	Particle->bAutoActivate = true;
 	static ConstructorHelpers::FObjectFinder<UParticleSystem>
-		ParticleSystem(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Explosion.P_Explosion'"));
+		ParticleSystem(TEXT("ParticleSystem'/Game/P_Explosion.P_Explosion'"));
 	if (ParticleSystem.Succeeded()) {
 		Particle->SetTemplate(ParticleSystem.Object);
 	}
@@ -97,4 +101,29 @@ void AProjectActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 	}
 
 
+
+
+	if ((OtherActor != nullptr) && (OtherActor != this) &&
+		(OtherComp != nullptr) && (OtherActor->IsA(AProjectActor::StaticClass()))) {
+
+		AProjectActor* MyProject2Character = Cast<AProjectActor>(OtherActor);
+
+		UE_LOG(LogTemp, Warning, TEXT("Destruiu Parabens o personagem"));
+		Destroy();
+
+	}
+
+
+
+}
+
+void AProjectActor::OnHit(AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
+	if ((OtherActor != nullptr) && (OtherActor != this) &&
+		(OtherComp != nullptr) && (OtherActor->IsA(AAIPatrol::StaticClass())))
+	{
+		AAIPatrol* MyProject2Character = Cast<AAIPatrol>(OtherActor);
+
+		Destroy();
+		UE_LOG(LogTemp, Warning, TEXT("OnHit"));
+	}
 }

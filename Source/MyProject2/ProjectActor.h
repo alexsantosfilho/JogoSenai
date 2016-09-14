@@ -21,7 +21,6 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 
 
-
 private:
 	UPROPERTY(EditAnywhere)
 	UBoxComponent* Root;
@@ -39,5 +38,9 @@ private:
 			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	UPROPERTY(VisibleAnywhere, Category = Tick)
 		float RunningTime;
+
+
+	UFUNCTION()
+		void OnHit(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 };
 

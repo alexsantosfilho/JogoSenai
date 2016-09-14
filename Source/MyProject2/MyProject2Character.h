@@ -15,6 +15,14 @@ class AMyProject2Character : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	/** SCene component for the In-Car view origin */
+	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+		class USceneComponent* InternalCameraBase;
+
+	/** Camera component for the In-Car view */
+	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+		UCameraComponent* InternalCamera;
 public:
 	AMyProject2Character();
 
@@ -25,6 +33,18 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
+
+	void OnToggleCamera();
+
+	FVector InternalCameraOrigin;
+
+	virtual void BeginPlay() override;
+
+	void OnResetVR();
+
+	static const FName LookUpBinding;
+	static const FName LookRightBinding;
+
 
 protected:
 
@@ -65,6 +85,9 @@ private:
 	UFUNCTION()
 		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	void EnableIncarView(const bool bState, const bool bForce = false);
+
+	
 
 protected:
 	// APawn interface
@@ -76,5 +99,11 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	virtual void Tick(float Delta) override;
+	//static const FName LookUpBinding;
+	//static const FName LookRightBinding;
+	/** Are we using incar camera */
+	UPROPERTY(Category = CameraBoom, VisibleDefaultsOnly, BlueprintReadOnly)
+		bool bInCarCameraActive;
 };
 
