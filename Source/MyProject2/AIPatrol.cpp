@@ -23,6 +23,8 @@ AAIPatrol::AAIPatrol()
 
 
 
+
+
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetCollisionProfileName("NoCollision");
 	MeshComp->AttachTo(RootComponent);
@@ -66,17 +68,24 @@ void AAIPatrol::OnPlayerCaught(APawn * Pawn)
 
 void AAIPatrol::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
-	if (OtherActor->IsA(AProjectActor::StaticClass())) {
+	//if (OtherActor->IsA(AProjectActor::StaticClass())) {
 
+<<<<<<< HEAD
 		Destroy();
 		UE_LOG(LogTemp, Warning, TEXT("NORMAL"));
 	}
 	
+=======
+	//	Destroy();
+		//UE_LOG(LogTemp, Warning, TEXT("NORMAL"));
+	//}
+
+>>>>>>> a6a81853dc7468c31a62ff1ea968ce36712abc88
 
 	if ((OtherActor != nullptr) && (OtherActor != this) &&
-		(OtherComp != nullptr) && (OtherActor->IsA(AAIPatrol::StaticClass()))) {
+		(OtherComp != nullptr) && (OtherActor->IsA(AProjectActor::StaticClass()))) {
 
-		AAIPatrol* MyProject2Character = Cast<AAIPatrol>(OtherActor);
+		AProjectActor* MyProject2Character = Cast<AProjectActor>(OtherActor);
 
 		UE_LOG(LogTemp, Warning, TEXT("Destruiu Parabens o personagem"));
 		Destroy();
@@ -84,3 +93,13 @@ void AAIPatrol::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 	}
 
 }
+
+//void AAIPatrol::OnHit(AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
+//if	((OtherActor != nullptr) && (OtherActor != this) &&
+		//(OtherComp != nullptr) && (OtherActor->IsA(AAIPatrol::StaticClass())))
+	//{
+
+	//	Destroy();
+	//	UE_LOG(LogTemp, Warning, TEXT("OnHit"));
+	//}
+//}
