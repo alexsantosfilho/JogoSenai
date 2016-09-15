@@ -6,23 +6,11 @@
 #include "Inimigo.h"
 #include "AIPatrol.h"
 #include "Camera/CameraComponent.h"
-#include "Components/SkeletalMeshComponent.h"
-#include "GameFramework/SpringArmComponent.h"
 #include "Components/InputComponent.h"
-#include "Engine/SkeletalMesh.h"
-#include "Engine.h"
 
-// Needed for VR Headset
-#if HMD_MODULE_INCLUDED
-#include "IHeadMountedDisplay.h"
-#endif // HMD_MODULE_INCLUDED
 
 const FName AMyProject2Character::LookUpBinding("LookUp");
-const FName AMyProject2Character::LookRightBinding("LookRight");
-
-
-//const FName AMyProject2Character::LookUpBinding("LookUp");
-//const FName AMyProject2Character::LookRightBinding("LookRight");
+const FName AMyProject2Character::LookRightBinding("Turn");
 
 //////////////////////////////////////////////////////////////////////////
 // AMyProject2Character
@@ -55,10 +43,19 @@ AMyProject2Character::AMyProject2Character()
 	CameraBoom->TargetArmLength = 300.0f; // The camera follows at this distance behind the character	
 	CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
 
-	// Create a follow camera
+												// Create a follow camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
-	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+	FollowCamera->bUsePawnControlRotation = true; // Camera does not rotate relative to arm
+
+
+	ArrowComp = CreateDefaultSubobject<UArrowComponent>(TEXT("ArrowComp"));
+	ArrowComp->SetHiddenInGame(false);
+	ArrowComp->ArrowSize = 2.0f;
+	ArrowComp->AttachTo(MeshComp);
+
+
+	//camera internar
 
 	InternalCameraOrigin = FVector(0.0f, -40.0f, 120.0f);
 
@@ -70,11 +67,6 @@ AMyProject2Character::AMyProject2Character()
 	InternalCamera->bUsePawnControlRotation = false;
 	InternalCamera->FieldOfView = 90.f;
 	InternalCamera->SetupAttachment(InternalCameraBase);
-
-	ArrowComp = CreateDefaultSubobject<UArrowComponent>(TEXT("ArrowComp"));
-	ArrowComp->SetHiddenInGame(false);
-	ArrowComp->ArrowSize = 2.0f;
-	ArrowComp->AttachTo(MeshComp);
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
@@ -96,12 +88,6 @@ void AMyProject2Character::SetupPlayerInputComponent(class UInputComponent* Inpu
 	InputComponent->BindAction("Drop", IE_Pressed, this, &AMyProject2Character::DropProjectActor);
 
 
-
-	InputComponent->BindAction("SwitchCamera", IE_Pressed, this, &AMyProject2Character::OnToggleCamera);
-
-
-
-
 	InputComponent->BindAxis("MoveForward", this, &AMyProject2Character::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &AMyProject2Character::MoveRight);
 
@@ -112,6 +98,7 @@ void AMyProject2Character::SetupPlayerInputComponent(class UInputComponent* Inpu
 	InputComponent->BindAxis("TurnRate", this, &AMyProject2Character::TurnAtRate);
 	InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	InputComponent->BindAxis("LookUpRate", this, &AMyProject2Character::LookUpAtRate);
+	InputComponent->BindAction("SwitchCamera", IE_Pressed, this, &AMyProject2Character::OnToggleCamera);
 
 	// handle touch devices
 	InputComponent->BindTouch(IE_Pressed, this, &AMyProject2Character::TouchStarted);
@@ -191,12 +178,12 @@ void AMyProject2Character::MoveForward(float Value)
 
 void AMyProject2Character::MoveRight(float Value)
 {
-	if ( (Controller != NULL) && (Value != 0.0f) )
+	if ((Controller != NULL) && (Value != 0.0f))
 	{
 		// find out which way is right
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
-	
+
 		// get right vector 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 		// add movement in that direction
@@ -220,12 +207,11 @@ void AMyProject2Character::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, A
 
 }
 
-
 void AMyProject2Character::OnToggleCamera()
 {
-	EnableIncarView(!bInCarCameraActive);
-	UE_LOG(LogTemp, Warning, TEXT("camera11"));
+	UE_LOG(LogTemp, Warning, TEXT("carro"));
 
+	EnableIncarView(!bInCarCameraActive);
 }
 
 void AMyProject2Character::EnableIncarView(const bool bState, const bool bForce)
@@ -236,70 +222,33 @@ void AMyProject2Character::EnableIncarView(const bool bState, const bool bForce)
 
 		if (bState == true)
 		{
-			OnResetVR();
-			CameraBoom->Deactivate();
-			FollowCamera->Activate();
+			FollowCamera->Deactivate();
+			InternalCamera->Activate();
+			UE_LOG(LogTemp, Warning, TEXT("InternalCamera"));
+
 		}
 		else
 		{
-			FollowCamera->Deactivate();
-			CameraBoom->Activate();
+			InternalCamera->Deactivate();
+			FollowCamera->Activate();
+			UE_LOG(LogTemp, Warning, TEXT("FollowCamera"));
+
 		}
 
-		//InCarSpeed->SetVisibility(bInCarCameraActive);
-		//InCarGear->SetVisibility(bInCarCameraActive);
+		
 	}
 }
-
-
-void AMyProject2Character::BeginPlay()
-{
-	Super::BeginPlay();
-
-	bool bEnableInCar = false;
-#if HMD_MODULE_INCLUDED
-	bEnableInCar = UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled();
-#endif // HMD_MODULE_INCLUDED
-	EnableIncarView(bEnableInCar, true);
-}
-
-void AMyProject2Character::OnResetVR()
-{
-#if HMD_MODULE_INCLUDED
-	if (GEngine->HMDDevice.IsValid())
-	{
-		GEngine->HMDDevice->ResetOrientationAndPosition();
-		InternalCamera->SetRelativeLocation(InternalCameraOrigin);
-		GetController()->SetControlRotation(FRotator());
-	}
-#endif // HMD_MODULE_INCLUDED
-}
-
 void AMyProject2Character::Tick(float Delta)
 {
 	Super::Tick(Delta);
 
-
-	bool bHMDActive = false;
-#if HMD_MODULE_INCLUDED
-	if ((GEngine->HMDDevice.IsValid() == true) && ((GEngine->HMDDevice->IsHeadTrackingAllowed() == true) || (GEngine->IsStereoscopic3D() == true)))
+	// controla a camera e tudo da camera 2
+	if ((InputComponent) && (bInCarCameraActive == true))
 	{
-		bHMDActive = true;
-	}
-#endif // HMD_MODULE_INCLUDED
-	if (bHMDActive == false)
-	{
-		if ((InputComponent) && (bInCarCameraActive == true))
-		{
 
-			const FRotator Rotation = Controller->GetControlRotation();
-			const FRotator YawRotation(0, Rotation.Yaw, 0);
-			FRotator HeadRotation = FollowCamera->RelativeRotation;
-			HeadRotation.Pitch += InputComponent->GetAxisValue(LookUpBinding);
-			HeadRotation.Yaw += InputComponent->GetAxisValue(LookRightBinding);
-			FollowCamera->RelativeRotation = HeadRotation;
-			UE_LOG(LogTemp, Warning, TEXT("camera1wwww1"));
-
-		}
+		FRotator HeadRotation = InternalCamera->RelativeRotation;
+		HeadRotation.Pitch += InputComponent->GetAxisValue(LookUpBinding);
+		HeadRotation.Yaw += InputComponent->GetAxisValue(LookRightBinding);
+		InternalCamera->RelativeRotation = HeadRotation;
 	}
 }
