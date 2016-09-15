@@ -47,6 +47,14 @@ public:
 	static const FName LookUpBinding;
 	static const FName LookRightBinding;
 
+	void SetColetavelLife(int NewColetavelLife);
+	int GetColetavelLife();
+
+	void SetColetavel(int NewColetavel);
+	int GetColetavel();
+	void OnDeath();
+
+
 protected:
 
 	/** Called for forwards/backward input */
@@ -88,6 +96,9 @@ private:
 			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 		void EnableIncarView( const bool bState, const bool bForce = false );
+
+		int ColetavelLife = 0;
+
 
 protected:
 	// APawn interface

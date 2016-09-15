@@ -252,3 +252,21 @@ void AMyProject2Character::Tick(float Delta)
 		InternalCamera->RelativeRotation = HeadRotation;
 	}
 }
+
+
+void AMyProject2Character::SetColetavelLife(int NewColetavelLife) {
+	ColetavelLife = NewColetavelLife;
+
+}
+int AMyProject2Character::GetColetavelLife() {
+	return ColetavelLife;
+}
+
+void AMyProject2Character::OnDeath() {
+	if (ColetavelLife <= 0) {
+		
+		ColetavelLife = 3;
+		UE_LOG(LogTemp, Warning, TEXT("Voce morreu!"));
+	}
+
+}
