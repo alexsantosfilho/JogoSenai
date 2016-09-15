@@ -70,17 +70,10 @@ void AAIPatrol::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 
 	//if (OtherActor->IsA(AProjectActor::StaticClass())) {
 
-<<<<<<< HEAD
-		Destroy();
-		UE_LOG(LogTemp, Warning, TEXT("NORMAL"));
-	}
-	
-=======
 	//	Destroy();
 		//UE_LOG(LogTemp, Warning, TEXT("NORMAL"));
 	//}
 
->>>>>>> a6a81853dc7468c31a62ff1ea968ce36712abc88
 
 	if ((OtherActor != nullptr) && (OtherActor != this) &&
 		(OtherComp != nullptr) && (OtherActor->IsA(AProjectActor::StaticClass()))) {
