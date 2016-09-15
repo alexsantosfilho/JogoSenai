@@ -32,7 +32,7 @@ void AMyProjectHud::DrawHUD() {
 	FVector2D ScreenDimensions = FVector2D(Canvas->SizeX,
 		Canvas->SizeY);
 
-	AMyProject2Character* MyCharacter = Cast<AMyProject2Character>(
+	AMyProject2Character* MyProject2Character = Cast<AMyProject2Character>(
 		UGameplayStatics::GetPlayerPawn(this, 0));
 
 	//FString ColetavelLifeString = FString::Printf(TEXT("ColetavelLife: %d"),
@@ -40,7 +40,7 @@ void AMyProjectHud::DrawHUD() {
 //	DrawText(ColetavelLifeString, FColor::Red, 50, 50, HUDFont);
 
 	FString ColetavelLifeString = FString::Printf(TEXT("ColetavelLife: %d"),
-		MyCharacter->GetColetavelLife());
+		MyProject2Character->GetColetavelLife());
 	DrawText(ColetavelLifeString, FColor::Blue, 50, 140, HUDFont);
 
 
@@ -57,16 +57,16 @@ void AMyProjectHud::DrawHUD() {
 
 	//DrawTextureSimple(MyTexture, 50, 50, 1.0f, false);
 
-	DrawTexture(MyTexture, 200, 50, MyCharacter->GetColetavel() * 35,
-		MyTexture->GetSizeY(), 0, 0, MyCharacter->GetColetavel() * 4,
+	DrawTexture(MyTexture, 200, 50, MyProject2Character->GetColetavelLife() * 35,
+		MyTexture->GetSizeY(), 0, 0, MyProject2Character->GetColetavelLife() * 4,
 		MyTexture->GetSizeY(), FLinearColor::White,
 		EBlendMode::BLEND_Translucent, 1.0f, false, 0.0f,
 		FVector2D::ZeroVector);
 
 
 
-	DrawTexture(MyTexture2, 200, 140, MyCharacter->GetColetavelLife() * 35,
-		MyTexture2->GetSizeY(), 0, 0, MyCharacter->GetColetavelLife() * 4,
+	DrawTexture(MyTexture2, 200, 140, MyProject2Character->GetColetavelLife() * 35,
+		MyTexture2->GetSizeY(), 0, 0, MyProject2Character->GetColetavelLife() * 4,
 		MyTexture2->GetSizeY(), FLinearColor::White,
 		EBlendMode::BLEND_Translucent, 1.0f, false, 0.0f,
 		FVector2D::ZeroVector);
