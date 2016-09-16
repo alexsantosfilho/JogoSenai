@@ -96,6 +96,7 @@ void AProjectActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 		AAIPatrol* MyProject2Character = Cast<AAIPatrol>(OtherActor);
 
 		UE_LOG(LogTemp, Warning, TEXT("Destruiu Parabens a bola"));
+		MyProject2Character->Destroy();
 		Destroy();
 
 	}
@@ -109,6 +110,7 @@ void AProjectActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 		AProjectActor* MyProject2Character = Cast<AProjectActor>(OtherActor);
 
 		UE_LOG(LogTemp, Warning, TEXT("Destruiu Parabens o personagem"));
+		//MyProject2Character->Destroy();
 		Destroy();
 
 	}
