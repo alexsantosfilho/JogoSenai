@@ -50,8 +50,8 @@ public:
 	void SetColetavelLife(int NewColetavelLife);
 	int GetColetavelLife();
 
-	void SetColetavel(int NewColetavel);
-	int GetColetavel();
+	//void SetColetavel(int NewColetavel);
+	//int GetColetavel();
 	void OnDeath();
 
 
@@ -97,7 +97,7 @@ private:
 
 		void EnableIncarView( const bool bState, const bool bForce = false );
 
-		int ColetavelLife = 0;
+		int ColetavelLife = 3;
 
 
 protected:

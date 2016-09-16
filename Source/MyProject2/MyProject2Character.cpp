@@ -212,7 +212,7 @@ void AMyProject2Character::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, A
 
 void AMyProject2Character::OnToggleCamera()
 {
-	UE_LOG(LogTemp, Warning, TEXT("TESTE"));
+	UE_LOG(LogTemp, Warning, TEXT("carro"));
 
 	EnableIncarView(!bInCarCameraActive);
 }
@@ -267,8 +267,9 @@ int AMyProject2Character::GetColetavelLife() {
 
 void AMyProject2Character::OnDeath() {
 	if (ColetavelLife <= 0) {
-		
+		FVector InitialLocation(-3426.8f, 89.0f, 128.0f);
 		ColetavelLife = 3;
+		SetActorLocation(InitialLocation);
 		UE_LOG(LogTemp, Warning, TEXT("Voce morreu!"));
 	}
 
