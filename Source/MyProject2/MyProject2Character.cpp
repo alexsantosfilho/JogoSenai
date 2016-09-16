@@ -212,7 +212,7 @@ void AMyProject2Character::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, A
 
 void AMyProject2Character::OnToggleCamera()
 {
-	UE_LOG(LogTemp, Warning, TEXT("carro"));
+	UE_LOG(LogTemp, Warning, TEXT("TESTE"));
 
 	EnableIncarView(!bInCarCameraActive);
 }
