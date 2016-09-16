@@ -41,7 +41,7 @@ void AMyProjectHud::DrawHUD() {
 
 	FString ColetavelLifeString = FString::Printf(TEXT("Life: %d"),
 		MyProject2Character->GetColetavelLife());
-	DrawText(ColetavelLifeString, FColor::Blue, 20, 40, HUDFont);
+	DrawText(ColetavelLifeString, FColor::Green, 20, 40, HUDFont);
 
 
 
@@ -65,7 +65,7 @@ void AMyProjectHud::DrawHUD() {
 
 
 
-	DrawTexture(MyTexture2, 200, 140, MyProject2Character->GetColetavelLife() * 35,
+	DrawTexture(MyTexture2, 20, 70, MyProject2Character->GetColetavelLife() * 35,
 		MyTexture2->GetSizeY(), 0, 0, MyProject2Character->GetColetavelLife() * 4,
 		MyTexture2->GetSizeY(), FLinearColor::White,
 		EBlendMode::BLEND_Translucent, 1.0f, false, 0.0f,
