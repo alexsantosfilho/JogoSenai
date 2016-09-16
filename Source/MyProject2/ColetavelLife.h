@@ -30,7 +30,7 @@ private:
 		UStaticMeshComponent* MeshComp;
 
 	UPROPERTY(EditAnywhere)
-		int LiColetavel = 1;
+		int ColetavelLife = 1;
 
 	UFUNCTION()
 		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,

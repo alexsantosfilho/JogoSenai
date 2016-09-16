@@ -48,6 +48,9 @@ AMyProject2Character::AMyProject2Character()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = true; // Camera does not rotate relative to arm
 
+	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
+	MeshComp->SetCollisionProfileName("NoColission");
+	MeshComp->AttachTo(GetCapsuleComponent());
 
 	ArrowComp = CreateDefaultSubobject<UArrowComponent>(TEXT("ArrowComp"));
 	ArrowComp->SetHiddenInGame(false);

@@ -14,11 +14,11 @@ AMyProjectHud::AMyProjectHud() {
 		HUDFont = Font.Object;
 	}
 
-	static ConstructorHelpers::FObjectFinder<UTexture2D>
-		Texture(TEXT("Texture2D'/Game/Green_Texture.Green_Texture'"));
-	if (Texture.Succeeded()) {
-		MyTexture = Texture.Object;
-	}
+//	static ConstructorHelpers::FObjectFinder<UTexture2D>
+	//	Texture(TEXT("Texture2D'/Game/Green_Texture.Green_Texture'"));
+	//if (Texture.Succeeded()) {
+		//MyTexture = Texture.Object;
+	//}
 	static ConstructorHelpers::FObjectFinder<UTexture2D>
 		Texture2(TEXT("Texture2D'/Game/Green_Texture.Green_Texture'"));
 	if (Texture2.Succeeded()) {
@@ -57,11 +57,11 @@ void AMyProjectHud::DrawHUD() {
 
 	//DrawTextureSimple(MyTexture, 50, 50, 1.0f, false);
 
-	DrawTexture(MyTexture, 200, 50, MyProject2Character->GetColetavelLife() * 35,
-		MyTexture->GetSizeY(), 0, 0, MyProject2Character->GetColetavelLife() * 4,
-		MyTexture->GetSizeY(), FLinearColor::White,
-		EBlendMode::BLEND_Translucent, 1.0f, false, 0.0f,
-		FVector2D::ZeroVector);
+//	DrawTexture(MyTexture, 200, 50, MyProject2Character->GetColetavelLife() * 35,
+	//	MyTexture->GetSizeY(), 0, 0, MyProject2Character->GetColetavelLife() * 4,
+	//	MyTexture->GetSizeY(), FLinearColor::White,
+	//	EBlendMode::BLEND_Translucent, 1.0f, false, 0.0f,
+	//	FVector2D::ZeroVector);
 
 
 
