@@ -39,9 +39,9 @@ void AMyProjectHud::DrawHUD() {
 	//	MyCharacter->GetColetavel());
 //	DrawText(ColetavelLifeString, FColor::Red, 50, 50, HUDFont);
 
-	FString ColetavelLifeString = FString::Printf(TEXT("ColetavelLife: %d"),
+	FString ColetavelLifeString = FString::Printf(TEXT("Life: %d"),
 		MyProject2Character->GetColetavelLife());
-	DrawText(ColetavelLifeString, FColor::Blue, 50, 140, HUDFont);
+	DrawText(ColetavelLifeString, FColor::Blue, 20, 40, HUDFont);
 
 
 
