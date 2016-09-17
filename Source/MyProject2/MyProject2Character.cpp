@@ -25,9 +25,9 @@ AMyProject2Character::AMyProject2Character()
 	BaseLookUpRate = 45.f;
 
 	// Don't rotate when the controller rotates. Let that just affect the camera.
-	bUseControllerRotationPitch = true;
-	bUseControllerRotationYaw = true;
-	bUseControllerRotationRoll = true;
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw = false;
+	bUseControllerRotationRoll = false;
 
 	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
@@ -100,6 +100,7 @@ void AMyProject2Character::SetupPlayerInputComponent(class UInputComponent* Inpu
 	InputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	InputComponent->BindAxis("TurnRate", this, &AMyProject2Character::TurnAtRate);
 	InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+
 	InputComponent->BindAxis("LookUpRate", this, &AMyProject2Character::LookUpAtRate);
 	InputComponent->BindAction("SwitchCamera", IE_Pressed, this, &AMyProject2Character::OnToggleCamera);
 
