@@ -49,16 +49,23 @@ AProjectActor::AProjectActor()
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
 	ProjectileMovement->UpdatedComponent = Root;
-	ProjectileMovement->InitialSpeed = 1000.0f;
-	ProjectileMovement->MaxSpeed = 1000.0f;
+	ProjectileMovement->InitialSpeed = 10000.0f;
+	ProjectileMovement->MaxSpeed = 10000.0f;
+	ProjectileMovement->bRotationFollowsVelocity = true;
+	ProjectileMovement->bShouldBounce = true;
 
-	InitialLifeSpan = 5.0f;
+	InitialLifeSpan = 1.0f;
 }
 void AProjectActor::BeginPlay()
 {
 	Super::BeginPlay();
 
+	DefaultY = GetActorLocation().Y;
+	DefaultX = GetActorLocation().X;
 	DefaultZ = GetActorLocation().Z;
+
+
+
 }
 
 void AProjectActor::Tick(float DeltaTime)
@@ -66,8 +73,19 @@ void AProjectActor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	FVector Location = GetActorLocation();
-	Location.Z = DefaultZ;
+	FVector Location2 = GetActorLocation();
+	FVector Location3 = GetActorLocation();
+
+
+
+	Location.Y = DefaultY;
 	SetActorLocation(Location);
+
+	Location.X = DefaultX;
+	SetActorLocation(Location2);
+
+	Location.Z = DefaultZ;
+	SetActorLocation(Location3);
 
 	RunningTime += DeltaTime;
 	float DestroyTime = 1.0f * RunningTime;

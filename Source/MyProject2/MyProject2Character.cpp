@@ -60,15 +60,15 @@ AMyProject2Character::AMyProject2Character()
 
 	//camera internar
 
-	InternalCameraOrigin = FVector(0.0f, -40.0f, 120.0f);
+//	InternalCameraOrigin = FVector(0.0f, -40.0f, 120.0f);
 
 	InternalCameraBase = CreateDefaultSubobject<USceneComponent>(TEXT("InternalCameraBase"));
-	InternalCameraBase->SetRelativeLocation(InternalCameraOrigin);
+//	InternalCameraBase->SetRelativeLocation(InternalCameraOrigin);
 	InternalCameraBase->SetupAttachment(GetMesh());
 
 	InternalCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("InternalCamera"));
 	InternalCamera->bUsePawnControlRotation = false;
-	InternalCamera->FieldOfView = 90.f;
+	InternalCamera->FieldOfView = 0.0f;
 	InternalCamera->SetupAttachment(InternalCameraBase);
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 

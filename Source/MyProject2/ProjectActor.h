@@ -31,7 +31,12 @@ private:
 	UPROPERTY(EditAnywhere)
 	UProjectileMovementComponent* ProjectileMovement;
 
+	float DefaultY;
+	float DefaultX;
 	float DefaultZ;
+
+
+
 
 	UFUNCTION()
 		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
