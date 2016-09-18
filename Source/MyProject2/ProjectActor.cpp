@@ -40,7 +40,7 @@ AProjectActor::AProjectActor()
 		(TEXT("Particle"));
 	Particle->bAutoActivate = true;
 	static ConstructorHelpers::FObjectFinder<UParticleSystem>
-		ParticleSystem(TEXT("ParticleSystem'/Game/particulas/P_Fire.P_Fire''"));
+		ParticleSystem(TEXT("ParticleSystem'/Game/particulas/P_Fire.P_Fire'"));
 	if (ParticleSystem.Succeeded()) {
 		Particle->SetTemplate(ParticleSystem.Object);
 	}

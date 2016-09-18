@@ -1,5 +1,3 @@
-// Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
-
 #include "MyProject2.h"
 #include "MyProject2Character.h"
 #include "ProjectActor.h"
@@ -60,15 +58,15 @@ AMyProject2Character::AMyProject2Character()
 
 	//camera internar
 
-//	InternalCameraOrigin = FVector(0.0f, -40.0f, 120.0f);
+	//	InternalCameraOrigin = FVector(0.0f, -40.0f, 120.0f);
 
 	InternalCameraBase = CreateDefaultSubobject<USceneComponent>(TEXT("InternalCameraBase"));
-//	InternalCameraBase->SetRelativeLocation(InternalCameraOrigin);
+	//	InternalCameraBase->SetRelativeLocation(InternalCameraOrigin);
 	InternalCameraBase->SetupAttachment(GetMesh());
 
 	InternalCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("InternalCamera"));
 	InternalCamera->bUsePawnControlRotation = false;
-	InternalCamera->FieldOfView = 0.0f;
+	InternalCamera->FieldOfView = 90.0f;
 	InternalCamera->SetupAttachment(InternalCameraBase);
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
@@ -241,7 +239,7 @@ void AMyProject2Character::EnableIncarView(const bool bState, const bool bForce)
 
 		}
 
-		
+
 	}
 }
 void AMyProject2Character::Tick(float Delta)
