@@ -76,11 +76,15 @@ void AAIPatrol::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 		(OtherComp != nullptr) && (OtherActor->IsA(AMyProject2Character::StaticClass()))) {
 
 		AMyProject2Character* MyProject2Character = Cast<AMyProject2Character>(OtherActor);
-		MyProject2Character->SetColetavelLife(MyProject2Character->GetColetavelLife() - DamageAmount); // DANO NO PERSONAGEM
+		MyProject2Character->SetColetavelLife(MyProject2Character->GetColetavelLife() - DamageAmount);
 		MyProject2Character->OnDeath();
-		UE_LOG(LogTemp, Warning, TEXT("Coletavel = %d"), MyProject2Character->GetColetavelLife());
+		UE_LOG(LogTemp, Warning, TEXT("Life = %d"), MyProject2Character->GetColetavelLife());
 
+		Destroy();
+
+		UE_LOG(LogTemp, Warning, TEXT("inimigo encostou no persobagem"));
 	}
+
 
 
 	if ((OtherActor != nullptr) && (OtherActor != this) &&
@@ -105,7 +109,6 @@ void AAIPatrol::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 		//UE_LOG(LogTemp, Warning, TEXT("Encostou1"));
 	}
 
-	
 
 
 
