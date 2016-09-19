@@ -112,10 +112,17 @@ void AProjectActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 		(OtherComp != nullptr) && (OtherActor->IsA(AAIPatrol::StaticClass()))) {
 
 		AAIPatrol* MyProject2Character = Cast<AAIPatrol>(OtherActor);
+		MyProject2Character->SetColetavelLife2(MyProject2Character->GetColetavelLife2() - DamageAmount); // DANO NO PERSONAGEM
+		MyProject2Character->OnDeath2();
 
-		UE_LOG(LogTemp, Warning, TEXT("Destruiu Parabens o personagem"));
+		UE_LOG(LogTemp, Warning, TEXT("Destruiu o personagem inimigo"));
 		MyProject2Character->Destroy();
-		Destroy();
+		//Destroy();
+
+
+
+		
+
 
 	}
 

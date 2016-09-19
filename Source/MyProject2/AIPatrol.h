@@ -29,6 +29,10 @@ public:
 		class UPawnSensingComponent* PawnSensingComp;
 
 
+	void SetColetavelLife2(int NewColetavelLife2);
+	int GetColetavelLife2();
+
+	void OnDeath2();
 
 	
 
@@ -36,7 +40,7 @@ private:
 	UFUNCTION()
 		void OnPlayerCaught(APawn* Pawn);
 
-
+	int ColetavelLife2 = 3;
 
 	UPROPERTY(EditAnywhere)
 		UShapeComponent* Root;

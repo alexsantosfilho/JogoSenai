@@ -18,7 +18,7 @@ AAIPatrol::AAIPatrol()
 
 	PawnSensingComp = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComp"));
 	PawnSensingComp->SetPeripheralVisionAngle(90.f);
-
+	
 	PrimaryActorTick.bCanEverTick = true;
 
 
@@ -28,6 +28,10 @@ AAIPatrol::AAIPatrol()
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetCollisionProfileName("NoCollision");
 	MeshComp->AttachTo(RootComponent);
+	MeshComp->SetCollisionProfileName("OverlapAllDynamic");
+	MeshComp->bGenerateOverlapEvents = true;
+	MeshComp->OnComponentBeginOverlap.AddDynamic(this, &AAIPatrol::OnOverlapBegin);
+
 
 }
 
@@ -68,11 +72,15 @@ void AAIPatrol::OnPlayerCaught(APawn * Pawn)
 
 void AAIPatrol::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
-	//if (OtherActor->IsA(AProjectActor::StaticClass())) {
+	if ((OtherActor != nullptr) && (OtherActor != this) &&
+		(OtherComp != nullptr) && (OtherActor->IsA(AMyProject2Character::StaticClass()))) {
 
-	//	Destroy();
-		//UE_LOG(LogTemp, Warning, TEXT("NORMAL"));
-	//}
+		AMyProject2Character* MyProject2Character = Cast<AMyProject2Character>(OtherActor);
+		MyProject2Character->SetColetavelLife(MyProject2Character->GetColetavelLife() - DamageAmount); // DANO NO PERSONAGEM
+		MyProject2Character->OnDeath();
+		UE_LOG(LogTemp, Warning, TEXT("Coletavel = %d"), MyProject2Character->GetColetavelLife());
+
+	}
 
 
 	if ((OtherActor != nullptr) && (OtherActor != this) &&
@@ -87,15 +95,19 @@ void AAIPatrol::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 	if ((OtherActor != nullptr) && (OtherActor != this) &&
 		(OtherComp != nullptr) && (OtherActor->IsA(AMyProject2Character::StaticClass()))) {
 
-		AMyProject2Character* MyProject2Character = Cast<AMyProject2Character>(OtherActor);
-		MyProject2Character->SetColetavelLife(MyProject2Character->GetColetavelLife() - DamageAmount);
-		MyProject2Character->OnDeath();
-		UE_LOG(LogTemp, Warning, TEXT("ColetavelLife = %d /10"), MyProject2Character->GetColetavelLife());
+		AMyProject2Character* AIPatrol = Cast<AMyProject2Character>(OtherActor);
 
+		UE_LOG(LogTemp, Warning, TEXT("Destruiu Parabens o personagem"));
+		AIPatrol->Destroy();
 		Destroy();
+	
 
-		UE_LOG(LogTemp, Warning, TEXT("Encostou"));
+		//UE_LOG(LogTemp, Warning, TEXT("Encostou1"));
 	}
+
+	
+
+
 
 }
 
@@ -108,3 +120,22 @@ void AAIPatrol::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 	//	UE_LOG(LogTemp, Warning, TEXT("OnHit"));
 	//}
 //}
+
+
+void AAIPatrol::SetColetavelLife2(int NewColetavelLife2) {
+	ColetavelLife2 = NewColetavelLife2;
+
+}
+int AAIPatrol::GetColetavelLife2() {
+	return ColetavelLife2;
+}
+
+void AAIPatrol::OnDeath2() {
+	if (ColetavelLife2 <= 0) {
+		FVector InitialLocation(-3426.8f, 89.0f, 128.0f);
+		ColetavelLife2= 3;
+		SetActorLocation(InitialLocation);
+		UE_LOG(LogTemp, Warning, TEXT("Voce morreu!"));
+	}
+
+}

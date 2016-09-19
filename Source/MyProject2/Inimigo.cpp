@@ -49,7 +49,7 @@ void AInimigo::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Other
 	if (OtherActor->IsA(AProjectActor::StaticClass())) {
 
 		Destroy();
-		UE_LOG(LogTemp, Warning, TEXT("NORMAL"));
+		UE_LOG(LogTemp, Warning, TEXT("destruiu a caixa"));
 	}
 }
 

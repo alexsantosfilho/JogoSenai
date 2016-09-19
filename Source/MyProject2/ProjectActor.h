@@ -35,6 +35,9 @@ private:
 	float DefaultX;
 	float DefaultZ;
 
+	UPROPERTY(EditAnywhere)
+		float DamageAmount = 1.0f;
+
 
 
 

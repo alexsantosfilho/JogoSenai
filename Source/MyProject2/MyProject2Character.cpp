@@ -198,6 +198,14 @@ void AMyProject2Character::MoveRight(float Value)
 void AMyProject2Character::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
 
+
+	if (OtherActor->IsA(AAIPatrol::StaticClass())) {
+
+		Destroy();
+		UE_LOG(LogTemp, Warning, TEXT("destruiu o principal"));
+	}
+
+
 	if ((OtherActor != nullptr) && (OtherActor != this) &&
 		(OtherComp != nullptr) && (OtherActor->IsA(AProjectActor::StaticClass()))) {
 
