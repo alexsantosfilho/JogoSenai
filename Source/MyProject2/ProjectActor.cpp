@@ -115,8 +115,8 @@ void AProjectActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 		MyProject2Character->SetColetavelLife2(MyProject2Character->GetColetavelLife2() - DamageAmount); // DANO NO PERSONAGEM
 		MyProject2Character->OnDeath2();
 
-		UE_LOG(LogTemp, Warning, TEXT("Destruiu o personagem inimigo"));
-		MyProject2Character->Destroy();
+		UE_LOG(LogTemp, Warning, TEXT("Destruiu o personagem inimigo!!!!!!"));
+	//	MyProject2Character->Destroy();
 		//Destroy();
 
 

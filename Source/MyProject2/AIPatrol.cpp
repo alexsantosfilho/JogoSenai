@@ -8,6 +8,8 @@
 #include "MyProject2Character.h"
 #include "ProjectActor.h"
 #include "Inimigo.h"
+#include "InimigoC.h"
+
 
 
 
@@ -135,10 +137,32 @@ int AAIPatrol::GetColetavelLife2() {
 
 void AAIPatrol::OnDeath2() {
 	if (ColetavelLife2 <= 0) {
-		FVector InitialLocation(-3426.8f, 89.0f, 128.0f);
-		ColetavelLife2= 3;
+		FVector InitialLocation(-5343.0f, 137.002579f, 226.001587f);
+		ColetavelLife2= 5;
 		SetActorLocation(InitialLocation);
-		UE_LOG(LogTemp, Warning, TEXT("Voce morreu!"));
+		UE_LOG(LogTemp, Warning, TEXT("Voce morreu2!"));
 	}
 
+}
+
+void AAIPatrol::Tick(float DeltaTime) {
+	Super::Tick(DeltaTime);
+	RunningTime += DeltaTime;
+	float ShootTime = 1.0f * RunningTime;
+	if (ShootTime > 2.0f) {
+		FActorSpawnParameters SpawnParameters;
+		UWorld* World = GetWorld();
+		if (World != nullptr) {
+			FRotator Rotation = MeshComp->GetComponentRotation();
+			AInimigoC* Proj = World->SpawnActor<AInimigoC>
+				(GetActorLocation(), Rotation,
+					SpawnParameters);
+			if (Proj != nullptr) {
+
+				RunningTime = 0.0f;
+			}
+
+		}
+
+	}
 }

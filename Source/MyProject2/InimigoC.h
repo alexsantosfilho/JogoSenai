@@ -3,16 +3,16 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Fogo.generated.h"
+#include "InimigoC.generated.h"
 
 UCLASS()
-class MYPROJECT2_API AFogo : public AActor
+class MYPROJECT2_API AInimigoC : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AFogo();
+	AInimigoC();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -39,7 +39,6 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = Tick)
 		float RunningTime;
-
 
 	
 	

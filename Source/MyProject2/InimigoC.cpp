@@ -1,14 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "MyProject2.h"
-#include "Fogo.h"
-#include "Lixeira.h"
+#include "InimigoC.h"
 #include "MyProject2Character.h"
+#include "AIPatrol.h"
 
 
 
 // Sets default values
-AFogo::AFogo()
+AInimigoC::AInimigoC()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -16,7 +16,7 @@ AFogo::AFogo()
 	Root = CreateDefaultSubobject<UBoxComponent>(TEXT("Root"));
 	Root->SetCollisionProfileName("OverlapAllDynamic");
 	Root->bGenerateOverlapEvents = true;
-	Root->OnComponentBeginOverlap.AddDynamic(this, &AFogo::OnOverlapBegin);
+	Root->OnComponentBeginOverlap.AddDynamic(this, &AInimigoC::OnOverlapBegin);
 
 	RootComponent = Root;
 
@@ -51,7 +51,7 @@ AFogo::AFogo()
 }
 
 // Called when the game starts or when spawned
-void AFogo::BeginPlay()
+void AInimigoC::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -59,7 +59,7 @@ void AFogo::BeginPlay()
 }
 
 // Called every frame
-void AFogo::Tick(float DeltaTime)
+void AInimigoC::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
@@ -74,7 +74,7 @@ void AFogo::Tick(float DeltaTime)
 	}
 }
 
-void AFogo::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+void AInimigoC::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 
 	if ((OtherActor != nullptr) && (OtherActor != this) &&
 		(OtherComp != nullptr) && (OtherActor->IsA(AMyProject2Character::StaticClass()))) {
