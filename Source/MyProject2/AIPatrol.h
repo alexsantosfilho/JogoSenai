@@ -43,7 +43,7 @@ private:
 	UFUNCTION()
 		void OnPlayerCaught(APawn* Pawn);
 
-	int ColetavelLife2 = 3;
+	int ColetavelLife2 = 5; // numero de vidas do inimigo
 
 	UPROPERTY(EditAnywhere)
 		UShapeComponent* Root;
@@ -52,7 +52,7 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = Tick)
 		float RunningTime;
 	UPROPERTY(EditAnywhere)
-		float DamageAmount = 1;
+		float DamageAmount = 1; // quantidade de dano que a colisao da bala tira
 	//UFUNCTION()
 	//void OnHit(class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
 	//			FVector NormalImpulse, const FHitResult& Hit);

@@ -137,8 +137,8 @@ int AAIPatrol::GetColetavelLife2() {
 
 void AAIPatrol::OnDeath2() {
 	if (ColetavelLife2 <= 0) {
-		FVector InitialLocation(-5343.0f, 137.002579f, 226.001587f);
-		ColetavelLife2= 5;
+		FVector InitialLocation(-3640.0f, -40.002f, 218.0012f);
+		ColetavelLife2;
 		SetActorLocation(InitialLocation);
 		UE_LOG(LogTemp, Warning, TEXT("Voce morreu2!"));
 	}

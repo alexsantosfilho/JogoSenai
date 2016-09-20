@@ -50,13 +50,8 @@ AMyProject2Character::AMyProject2Character()
 	MeshComp->SetCollisionProfileName("NoColission");
 	MeshComp->AttachTo(GetCapsuleComponent());
 
-	ArrowComp = CreateDefaultSubobject<UArrowComponent>(TEXT("ArrowComp"));
-	ArrowComp->SetHiddenInGame(false);
-	ArrowComp->ArrowSize = 2.0f;
-	ArrowComp->AttachTo(MeshComp);
+	
 
-
-	//camera internar
 
 	//	InternalCameraOrigin = FVector(0.0f, -40.0f, 120.0f);
 
@@ -69,12 +64,10 @@ AMyProject2Character::AMyProject2Character()
 	InternalCamera->FieldOfView = 90.0f;
 	InternalCamera->SetupAttachment(InternalCameraBase);
 
-	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
-	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+	
 }
 
-//////////////////////////////////////////////////////////////////////////
-// Input
+
 
 void AMyProject2Character::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
@@ -99,7 +92,6 @@ void AMyProject2Character::SetupPlayerInputComponent(class UInputComponent* Inpu
 	InputComponent->BindAxis("TurnRate", this, &AMyProject2Character::TurnAtRate);
 	InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 
-	InputComponent->BindAxis("LookUpRate", this, &AMyProject2Character::LookUpAtRate);
 	InputComponent->BindAction("SwitchCamera", IE_Pressed, this, &AMyProject2Character::OnToggleCamera);
 
 	// handle touch devices
@@ -158,11 +150,7 @@ void AMyProject2Character::TurnAtRate(float Rate)
 	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
 
-void AMyProject2Character::LookUpAtRate(float Rate)
-{
-	// calculate delta for this frame from the rate information
-	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
-}
+
 
 void AMyProject2Character::MoveForward(float Value)
 {
