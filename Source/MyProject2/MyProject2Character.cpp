@@ -264,7 +264,7 @@ int AMyProject2Character::GetColetavelLife() {
 
 void AMyProject2Character::OnDeath() {
 	if (ColetavelLife <= 0) {
-		FVector InitialLocation(-5343.0f, 137.002579f, 226.001587f);
+		FVector InitialLocation(-7414.0f, 137.002579f, 226.001587f);
 		ColetavelLife = 3;
 		SetActorLocation(InitialLocation);
 		UE_LOG(LogTemp, Warning, TEXT("Voce morreu!3"));
