@@ -16,14 +16,13 @@ ALuz::ALuz()
 	Root = CreateDefaultSubobject<UBoxComponent>(TEXT("Root"));
 	Root->SetCollisionProfileName("OverlapAllDynamic");
 	Root->bGenerateOverlapEvents = true;
-	Root->OnComponentBeginOverlap.AddDynamic(this, &ALuz::OnOverlapBegin);
 
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetCollisionProfileName("NoCollision");
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>
-		Mesh(TEXT(""));
+		Mesh(TEXT("ParticleSystem'/Game/particulas/P_Fire.P_Fire'"));
 	if (Mesh.Succeeded()) {
 		MeshComp->SetStaticMesh(Mesh.Object);
 	}
@@ -72,21 +71,4 @@ void ALuz::Tick(float DeltaTime)
 	if (DestroyTime > 0.9f) {
 		Destroy();
 	}
-}
-
-void ALuz::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
-
-	if ((OtherActor != nullptr) && (OtherActor != this) &&
-		(OtherComp != nullptr) && (OtherActor->IsA(AMyProject2Character::StaticClass()))) {
-
-		AMyProject2Character* MyProject2Character = Cast<AMyProject2Character>(OtherActor);
-		MyProject2Character->SetColetavelLife(MyProject2Character->GetColetavelLife() - DamageAmount);
-		MyProject2Character->OnDeath();
-		UE_LOG(LogTemp, Warning, TEXT("Life = %d"), MyProject2Character->GetColetavelLife());
-
-		Destroy();
-
-		UE_LOG(LogTemp, Warning, TEXT("Encostou"));
-	}
-
 }

@@ -17,11 +17,12 @@ ALustre::ALustre()
 	RootComponent = Root;
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetCollisionProfileName("NoCollision");
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> Mesh(TEXT("StaticMesh'/Game/3dsmax/lixo.lixo'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> Mesh(TEXT("StaticMesh'/Game/3dsmax/iluminação.iluminação'"));
 	if (Mesh.Succeeded()) {
 		MeshComp->SetStaticMesh(Mesh.Object);
 	}
-	static ConstructorHelpers::FObjectFinder<UMaterial> Material(TEXT("Material'/Game/3dsmax/NewMaterial2.NewMaterial2'"));
+
+	static ConstructorHelpers::FObjectFinder<UMaterial> Material(TEXT("Material'/Game/3dsmax/Material__25.Material__25'"));
 	if (Material.Succeeded()) {
 		MeshComp->SetMaterial(0, Material.Object);
 	}
