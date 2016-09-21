@@ -7,7 +7,6 @@
 
 
 
-
 // Sets default values
 AProjectActor::AProjectActor()
 {
@@ -49,8 +48,8 @@ AProjectActor::AProjectActor()
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
 	ProjectileMovement->UpdatedComponent = Root;
-	ProjectileMovement->InitialSpeed = 10000.0f;
-	ProjectileMovement->MaxSpeed = 10000.0f;
+	ProjectileMovement->InitialSpeed = 1200.0f;
+	ProjectileMovement->MaxSpeed = 00.0f;
 	ProjectileMovement->bRotationFollowsVelocity = true;
 	ProjectileMovement->bShouldBounce = true;
 
@@ -97,16 +96,16 @@ void AProjectActor::Tick(float DeltaTime)
 
 void AProjectActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 	
+//	if ((OtherActor != nullptr) && (OtherActor != this) &&
+	//	(OtherComp != nullptr) && (OtherActor->IsA(AProjectActor::StaticClass()))) {
 
-	if ((OtherActor != nullptr) && (OtherActor != this) &&
-		(OtherComp != nullptr) && (OtherActor->IsA(AProjectActor::StaticClass()))) {
+	//	AAIPatrol* AIPatrol = Cast<AAIPatrol>(OtherActor);
+	//	ProjectActor->Destroy();
 
-		AProjectActor* MyProject2Character = Cast<AProjectActor>(OtherActor);
+	//	UE_LOG(LogTemp, Warning, TEXT("Destruiu a balaaa!!!!!!"));
 
-		UE_LOG(LogTemp, Warning, TEXT("Destruiu Parabens"));
-		Destroy();
+	//}
 
-	}
 
 	if ((OtherActor != nullptr) && (OtherActor != this) &&
 		(OtherComp != nullptr) && (OtherActor->IsA(AAIPatrol::StaticClass()))) {
@@ -116,41 +115,10 @@ void AProjectActor::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 		MyProject2Character->OnDeath2();
 
 		UE_LOG(LogTemp, Warning, TEXT("Destruiu o personagem inimigo!!!!!!"));
-	//	MyProject2Character->Destroy();
-		//Destroy();
 
-
-
-		
 
 
 	}
-
-
-
-
-	if ((OtherActor != nullptr) && (OtherActor != this) &&
-		(OtherComp != nullptr) && (OtherActor->IsA(AProjectActor::StaticClass()))) {
-
-		AProjectActor* MyProject2Character = Cast<AProjectActor>(OtherActor);
-
-		UE_LOG(LogTemp, Warning, TEXT("Destruiu Parabens o personagem"));
-		//MyProject2Character->Destroy();
-		Destroy();
-
-	}
-
-
 
 }
 
-void AProjectActor::OnHit(AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
-	if ((OtherActor != nullptr) && (OtherActor != this) &&
-		(OtherComp != nullptr) && (OtherActor->IsA(AAIPatrol::StaticClass())))
-	{
-		AAIPatrol* MyProject2Character = Cast<AAIPatrol>(OtherActor);
-
-		Destroy();
-		UE_LOG(LogTemp, Warning, TEXT("OnHit"));
-	}
-}

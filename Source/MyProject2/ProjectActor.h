@@ -48,7 +48,5 @@ private:
 		float RunningTime;
 
 
-	UFUNCTION()
-		void OnHit(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 };
 
