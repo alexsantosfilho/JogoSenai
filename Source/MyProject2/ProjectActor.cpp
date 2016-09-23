@@ -48,8 +48,8 @@ AProjectActor::AProjectActor()
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
 	ProjectileMovement->UpdatedComponent = Root;
-	ProjectileMovement->InitialSpeed = 1200.0f;
-	ProjectileMovement->MaxSpeed = 00.0f;
+	ProjectileMovement->InitialSpeed = 6000.0f;
+	ProjectileMovement->MaxSpeed = 6000.0f;
 	ProjectileMovement->bRotationFollowsVelocity = true;
 	ProjectileMovement->bShouldBounce = true;
 
