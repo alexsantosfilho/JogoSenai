@@ -52,7 +52,7 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = Tick)
 		float RunningTime;
 	UPROPERTY(EditAnywhere)
-		float DamageAmount = 1; // quantidade de dano que a colisao da bala tira
+		float DamageAmount = 1.0f; // quantidade de dano que a colisao da bala tira
 	//UFUNCTION()
 	//void OnHit(class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
 	//			FVector NormalImpulse, const FHitResult& Hit);

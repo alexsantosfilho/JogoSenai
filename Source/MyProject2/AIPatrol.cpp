@@ -34,6 +34,9 @@ AAIPatrol::AAIPatrol()
 	MeshComp->bGenerateOverlapEvents = true;
 	MeshComp->OnComponentBeginOverlap.AddDynamic(this, &AAIPatrol::OnOverlapBegin);
 
+	GetCharacterMovement()->MaxWalkSpeed = 180.f;
+
+
 
 }
 
@@ -138,7 +141,7 @@ int AAIPatrol::GetColetavelLife2() {
 void AAIPatrol::OnDeath2() {
 	if (ColetavelLife2 <= 0) {
 		FVector InitialLocation(-3640.0f, -40.002f, 218.0012f);
-		ColetavelLife2;
+		ColetavelLife2 =3;
 		SetActorLocation(InitialLocation);
 		UE_LOG(LogTemp, Warning, TEXT("Voce morreu2!"));
 	}

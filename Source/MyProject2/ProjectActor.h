@@ -36,7 +36,7 @@ private:
 	float DefaultZ;
 
 	UPROPERTY(EditAnywhere)
-		float DamageAmount = 0.5f;
+		float DamageAmount = 1.0f;
 
 
 
