@@ -7,6 +7,7 @@
 
 
 
+
 // Sets default values
 AFogo::AFogo()
 {
