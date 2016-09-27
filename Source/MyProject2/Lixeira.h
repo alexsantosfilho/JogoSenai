@@ -13,7 +13,7 @@ class MYPROJECT2_API ALixeira : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ALixeira();
-
+//
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
