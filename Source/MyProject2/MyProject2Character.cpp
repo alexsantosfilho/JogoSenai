@@ -5,6 +5,8 @@
 #include "AIPatrol.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
+#include "Item.h"
+
 
 
 const FName AMyProject2Character::LookUpBinding("LookUp");
@@ -64,6 +66,15 @@ AMyProject2Character::AMyProject2Character()
 	InternalCamera->FieldOfView = 90.0f;
 	InternalCamera->SetupAttachment(InternalCameraBase);
 
+
+
+
+	CollectCollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("CollectCollision"));
+	CollectCollisionComp->InitSphereRadius(200.0f);
+	CollectCollisionComp->AttachTo(RootComponent);
+
+	AutoPossessPlayer = EAutoReceiveInput::Player0;
+
 	
 }
 
@@ -97,6 +108,11 @@ void AMyProject2Character::SetupPlayerInputComponent(class UInputComponent* Inpu
 	// handle touch devices
 	InputComponent->BindTouch(IE_Pressed, this, &AMyProject2Character::TouchStarted);
 	InputComponent->BindTouch(IE_Released, this, &AMyProject2Character::TouchStopped);
+
+
+
+	InputComponent->BindAction("Collect", IE_Pressed, this, &AMyProject2Character::OnCollect);
+
 }
 
 
@@ -270,4 +286,19 @@ void AMyProject2Character::OnDeath() {
 		UE_LOG(LogTemp, Warning, TEXT("Voce morreu!3"));
 	}
 
+}
+
+
+void AMyProject2Character::OnCollect() {
+	TArray<AActor*> AtoresColetados;
+	CollectCollisionComp->GetOverlappingActors(AtoresColetados);
+
+	for (int i = 0; i < AtoresColetados.Num(); i++) {
+		if (AtoresColetados[i]->IsA(AItem::StaticClass())) {
+			AItem* ItemColetado = Cast<AItem>(AtoresColetados[i]);
+			Inventory.Add(ItemColetado);
+			ItemColetado->Destroy();
+			UE_LOG(LogTemp, Warning, TEXT("%d"), Inventory.Num());
+		}
+	}
 }

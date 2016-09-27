@@ -54,6 +54,9 @@ public:
 	//int GetColetavel();
 	void OnDeath();
 
+	FORCEINLINE TArray<class AItem*> GetInventory() const { return Inventory; }
+
+
 
 protected:
 
@@ -98,6 +101,10 @@ private:
 
 		int ColetavelLife = 3;
 
+		void OnCollect();
+
+		USphereComponent* CollectCollisionComp;
+		TArray<class AItem*> Inventory;
 
 protected:
 	// APawn interface

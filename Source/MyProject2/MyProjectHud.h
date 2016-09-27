@@ -24,6 +24,9 @@ public:
 	UPROPERTY(EditAnywhere)
 		UTexture2D* MyTexture2;
 
+	UPROPERTY(EditAnywhere)
+		UTexture2D* Potion;
+
 	virtual void DrawHUD() override;
 
 private:

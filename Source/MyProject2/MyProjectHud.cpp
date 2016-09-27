@@ -13,17 +13,17 @@ AMyProjectHud::AMyProjectHud() {
 	// Set the crosshair texture
 	static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshiarTexObj(TEXT("Texture2D'/Game/mira/mira.mira'"));
 	CrosshairTex = CrosshiarTexObj.Object;
-	
+
 	static ConstructorHelpers::FObjectFinder<UFont>
 		Font(TEXT("Font'/Engine/EngineFonts/RobotoDistanceField.RobotoDistanceField'"));
 	if (Font.Succeeded()) {
 		HUDFont = Font.Object;
 	}
 
-//	static ConstructorHelpers::FObjectFinder<UTexture2D>
+	//	static ConstructorHelpers::FObjectFinder<UTexture2D>
 	//	Texture(TEXT("Texture2D'/Game/Green_Texture.Green_Texture'"));
 	//if (Texture.Succeeded()) {
-		//MyTexture = Texture.Object;
+	//MyTexture = Texture.Object;
 	//}
 	static ConstructorHelpers::FObjectFinder<UTexture2D>
 		Texture2(TEXT("Texture2D'/Game/Green_Texture.Green_Texture'"));
@@ -35,8 +35,8 @@ AMyProjectHud::AMyProjectHud() {
 void AMyProjectHud::DrawHUD() {
 	Super::DrawHUD();
 
-	
-	
+
+
 	// Draw very simple crosshair
 
 	// find center of the Canvas
@@ -50,18 +50,18 @@ void AMyProjectHud::DrawHUD() {
 	FCanvasTileItem TileItem(CrosshairDrawPosition, CrosshairTex->Resource, FLinearColor::White);
 	TileItem.BlendMode = SE_BLEND_Translucent;
 	Canvas->DrawItem(TileItem);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
 	FVector2D ScreenDimensions = FVector2D(Canvas->SizeX,
 		Canvas->SizeY);
 
@@ -70,7 +70,7 @@ void AMyProjectHud::DrawHUD() {
 
 	//FString ColetavelLifeString = FString::Printf(TEXT("ColetavelLife: %d"),
 	//	MyCharacter->GetColetavel());
-//	DrawText(ColetavelLifeString, FColor::Red, 50, 50, HUDFont);
+	//	DrawText(ColetavelLifeString, FColor::Red, 50, 50, HUDFont);
 
 	FString ColetavelLifeString = FString::Printf(TEXT("Life: %d"),
 		MyProject2Character->GetColetavelLife());
@@ -90,7 +90,7 @@ void AMyProjectHud::DrawHUD() {
 
 	//DrawTextureSimple(MyTexture, 50, 50, 1.0f, false);
 
-//	DrawTexture(MyTexture, 200, 50, MyProject2Character->GetColetavelLife() * 35,
+	//	DrawTexture(MyTexture, 200, 50, MyProject2Character->GetColetavelLife() * 35,
 	//	MyTexture->GetSizeY(), 0, 0, MyProject2Character->GetColetavelLife() * 4,
 	//	MyTexture->GetSizeY(), FLinearColor::White,
 	//	EBlendMode::BLEND_Translucent, 1.0f, false, 0.0f,
@@ -104,12 +104,3 @@ void AMyProjectHud::DrawHUD() {
 		EBlendMode::BLEND_Translucent, 1.0f, false, 0.0f,
 		FVector2D::ZeroVector);
 }
-
-
-
-
-
-
-
-
-
