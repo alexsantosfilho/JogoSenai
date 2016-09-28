@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "Item.h"
+#include "Alavanca.h"
 
 
 
@@ -299,6 +300,9 @@ void AMyProject2Character::OnCollect() {
 			Inventory.Add(ItemColetado);
 			ItemColetado->Destroy();
 			UE_LOG(LogTemp, Warning, TEXT("%d"), Inventory.Num());
+		}else if (AtoresColetados[i]->IsA(AAlavanca::StaticClass())) {
+			AAlavanca* Alavanca = Cast<AAlavanca>(AtoresColetados[i]);
+			Alavanca->OnPressed();
 		}
 	}
 }

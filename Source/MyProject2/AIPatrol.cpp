@@ -9,6 +9,7 @@
 #include "ProjectActor.h"
 #include "Inimigo.h"
 #include "InimigoC.h"
+//#include "MyProject2TextCharacter"
 
 
 
@@ -24,6 +25,10 @@ AAIPatrol::AAIPatrol()
 	PrimaryActorTick.bCanEverTick = true;
 
 
+	MyText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("RotatingText"));
+	MyText->SetWorldSize(70.f);
+	MyText->SetTextRenderColor(FColor::Blue);
+	//MyText->SetHorizontalAlignment(EHTA_Center);
 
 
 
@@ -150,6 +155,11 @@ void AAIPatrol::OnDeath2() {
 
 void AAIPatrol::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
+	
+	MakeTextFacePlayer();
+
+	
+	
 	RunningTime += DeltaTime;
 	float ShootTime = 1.0f * RunningTime;
 	if (ShootTime > 2.0f) {
@@ -168,4 +178,10 @@ void AAIPatrol::Tick(float DeltaTime) {
 		}
 
 	}
+}
+
+void AAIPatrol::MakeTextFacePlayer() {
+
+	//ARelativeTextCharacter* Character = Cast<ARelativeTextCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
+	// FRotation NewRotation = char
 }

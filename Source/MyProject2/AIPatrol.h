@@ -37,6 +37,11 @@ public:
 
 	void OnDeath2();
 
+	UPROPERTY(EditAnywhere, Category = AI)
+	UTextRenderComponent* MyText;
+
+	void MakeTextFacePlayer();
+
 	
 
 private:
