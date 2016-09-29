@@ -23,6 +23,15 @@ class AMyProject2Character : public ACharacter
 	/** Camera component for the In-Car view */
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		UCameraComponent* InternalCamera;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+		class USkeletalMeshComponent* Mesh1P;
+
+	/** Gun mesh: 1st person view (seen only by self) */
+	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+		class USkeletalMeshComponent* FP_Gun;
+
+
 public:
 	AMyProject2Character();
 
@@ -56,7 +65,8 @@ public:
 
 	FORCEINLINE TArray<class AItem*> GetInventory() const { return Inventory; }
 
-
+	/** Returns Mesh1P subobject **/
+	FORCEINLINE class USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
 
 protected:
 
@@ -116,5 +126,6 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	virtual void BeginPlay();
 };
 
