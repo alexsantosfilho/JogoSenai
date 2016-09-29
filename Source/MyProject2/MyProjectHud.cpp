@@ -30,11 +30,15 @@ AMyProjectHud::AMyProjectHud() {
 	if (Texture2.Succeeded()) {
 		MyTexture2 = Texture2.Object;
 	}
+	ConstructorHelpers::FObjectFinder<UTexture2D>
+		PotionTexture(TEXT("Texture2D'/Game/IconHPotionGreater.IconHPotionGreater'"));
+	if (PotionTexture.Succeeded()) {
+		Potion = PotionTexture.Object;
+	}
 }
 
 void AMyProjectHud::DrawHUD() {
 	Super::DrawHUD();
-
 
 
 	// Draw very simple crosshair
@@ -82,6 +86,12 @@ void AMyProjectHud::DrawHUD() {
 
 
 
+	DrawTextureSimple(Potion, ScreenDimensions.X - Potion->GetSizeX() * 2,
+		50, 1.0f, false);
+
+	FString PotionAmount = FString::Printf(TEXT("X %d"), MyProject2Character->GetInventory().Num());
+	DrawText(PotionAmount, FColor::Red, ScreenDimensions.X - Potion->GetSizeX(),
+		50, HUDFont);
 
 
 
