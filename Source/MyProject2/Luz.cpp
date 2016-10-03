@@ -22,7 +22,7 @@ ALuz::ALuz()
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetCollisionProfileName("NoCollision");
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>
-		Mesh(TEXT("ParticleSystem'/Game/particulas/P_Fire.P_Fire'"));
+		Mesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Torus.Shape_Torus'"));
 	if (Mesh.Succeeded()) {
 		MeshComp->SetStaticMesh(Mesh.Object);
 	}

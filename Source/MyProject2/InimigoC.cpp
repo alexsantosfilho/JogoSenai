@@ -23,7 +23,7 @@ AInimigoC::AInimigoC()
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetCollisionProfileName("NoCollision");
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>
-		Mesh(TEXT(""));
+		Mesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_NarrowCapsule.Shape_NarrowCapsule'"));
 	if (Mesh.Succeeded()) {
 		MeshComp->SetStaticMesh(Mesh.Object);
 	}
