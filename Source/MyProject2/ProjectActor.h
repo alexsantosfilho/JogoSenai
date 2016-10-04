@@ -19,7 +19,9 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
-
+	UPROPERTY(EditAnywhere)
+		FVector Velocity = FVector(300.f);
+	float BulletExpiry = 0;
 
 private:
 	UPROPERTY(EditAnywhere)

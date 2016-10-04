@@ -68,6 +68,10 @@ public:
 	/** Returns Mesh1P subobject **/
 	FORCEINLINE class USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
 
+	UPROPERTY(EditAnywhere, Category= Projectile)
+		TSubclassOf<class AProjectActor> ProjectileClass;
+
+
 protected:
 
 	/** Called for forwards/backward input */

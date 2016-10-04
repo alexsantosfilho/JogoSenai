@@ -70,21 +70,65 @@ void AProjectActor::BeginPlay()
 void AProjectActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	// novo
 
-	FVector Location = GetActorLocation();
-	FVector Location2 = GetActorLocation();
-	FVector Location3 = GetActorLocation();
+	FHitResult HitResult;
+
+	FVector StartTrace = this->GetActorLocation();
+	FVector EndTrace = (Velocity * DeltaTime) + StartTrace;
+	EndTrace.Y += this->GetActorRotation().Pitch;
+	//	EndTrace.Y += this->GetActorRotation().Yaw;
+	//	EndTrace.X += this->GetActorRotation().Roll;
 
 
 
-	Location.Y = DefaultY;
-	SetActorLocation(Location);
 
-	Location.X = DefaultX;
-	SetActorLocation(Location2);
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.AddIgnoredActor(this);
 
-	Location.Z = DefaultZ;
-	SetActorLocation(Location3);
+
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartTrace, EndTrace, ECC_Destructible, CollisionParams))
+	{
+
+		if (HitResult.GetActor())
+		{
+			DrawDebugSolidBox(GetWorld(), HitResult.ImpactPoint, FVector(10.f), FColor::Blue, true);
+			ADestructibleActor* Mesh = Cast<ADestructibleActor>(HitResult.GetActor());
+
+			if (Mesh) {
+
+				Mesh->GetDestructibleComponent()->ApplyRadiusDamage(10.f, HitResult.ImpactPoint, 32.f, 10.f, false);
+
+			}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT(" COULD NOT GET MESH. Type is %s"), *HitResult.GetActor()->StaticClass()->GetFName().ToString()));
+			}
+
+		}
+		Destroy();
+
+	}
+	else
+	{
+		BulletExpiry += DeltaTime;
+
+		DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor(0.0f, -BulletExpiry * 80.f, 100.f), true);
+
+			SetActorLocation(EndTrace);
+
+		//	Velocity += FVector(0.f, 0.f, -2000.f) * DeltaTime;
+	}
+
+	if (BulletExpiry > 3) {
+
+		Destroy();
+	}
+
+	//
+
+
+
 
 	RunningTime += DeltaTime;
 	float DestroyTime = 1.0f * RunningTime;

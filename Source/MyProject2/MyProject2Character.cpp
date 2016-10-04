@@ -10,6 +10,7 @@
 
 
 
+
 const FName AMyProject2Character::LookUpBinding("LookUp");
 const FName AMyProject2Character::LookRightBinding("Turn");
 
@@ -172,6 +173,10 @@ void AMyProject2Character::DropProjectActor() {
 		const FRotator Rotation = Controller->GetControlRotation();
 
 		AProjectActor* proj = World->SpawnActor<AProjectActor>(GetActorLocation(), Rotation, SpawnParameters);
+		FVector NewVelocity = GetActorForwardVector() * 5000.f;
+
+		//ProjectileClass->Velocity = FVector(NewVelocity);
+
 		if (proj != nullptr) {
 			UE_LOG(LogTemp, Warning, TEXT("Span ok!"));
 		}
