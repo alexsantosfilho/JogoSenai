@@ -35,6 +35,7 @@ AMyProjectHud::AMyProjectHud() {
 	if (PotionTexture.Succeeded()) {
 		Potion = PotionTexture.Object;
 	}
+
 }
 
 void AMyProjectHud::DrawHUD() {
