@@ -41,7 +41,9 @@ public:
 	UTextRenderComponent* MyText;
 
 	void MakeTextFacePlayer();
-
+	
+//	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = StaticMeshAssets)
+	//	UStaticMeshComponent* Mesh;
 	
 
 private:
@@ -52,8 +54,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		UShapeComponent* Root;
-	UPROPERTY(EditAnywhere)
-		UStaticMeshComponent* MeshComp;
+	
 	UPROPERTY(VisibleAnywhere, Category = Tick)
 		float RunningTime;
 	UPROPERTY(EditAnywhere)

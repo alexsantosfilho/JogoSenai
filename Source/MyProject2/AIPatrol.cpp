@@ -32,12 +32,12 @@ AAIPatrol::AAIPatrol()
 
 
 
-	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
-	MeshComp->SetCollisionProfileName("NoCollision");
-	MeshComp->AttachTo(RootComponent);
-	MeshComp->SetCollisionProfileName("OverlapAllDynamic");
-	MeshComp->bGenerateOverlapEvents = true;
-	MeshComp->OnComponentBeginOverlap.AddDynamic(this, &AAIPatrol::OnOverlapBegin);
+//	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
+	//Mesh->SetCollisionProfileName("NoCollision");
+//	Mesh->AttachTo(RootComponent);
+//	Mesh->SetCollisionProfileName("OverlapAllDynamic");
+//	Mesh->bGenerateOverlapEvents = true;
+	//Mesh->OnComponentBeginOverlap.AddDynamic(this, &AAIPatrol::OnOverlapBegin);
 
 	GetCharacterMovement()->MaxWalkSpeed = 180.f;
 
@@ -166,14 +166,14 @@ void AAIPatrol::Tick(float DeltaTime) {
 		FActorSpawnParameters SpawnParameters;
 		UWorld* World = GetWorld();
 		if (World != nullptr) {
-			FRotator Rotation = MeshComp->GetComponentRotation();
-			AInimigoC* Proj = World->SpawnActor<AInimigoC>
-				(GetActorLocation(), Rotation,
-					SpawnParameters);
-			if (Proj != nullptr) {
+			//FRotator Rotation = Mesh->GetComponentRotation();
+	//		AInimigoC* Proj = World->SpawnActor<AInimigoC>
+			//	(GetActorLocation(), Rotation,
+				//	SpawnParameters);
+		//	if (Proj != nullptr) {
 
-				RunningTime = 0.0f;
-			}
+			//	RunningTime = 0.0f;
+		//	}
 
 		}
 

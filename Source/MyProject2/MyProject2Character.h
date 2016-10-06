@@ -104,8 +104,8 @@ protected:
 	void DropProjectActor();
 
 private:
-	UPROPERTY(EditAnywhere)
-		UStaticMeshComponent* MeshComp;
+//	UPROPERTY(EditAnywhere)
+		//UStaticMeshComponent* MeshComp;
 	
 	UFUNCTION()
 		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
