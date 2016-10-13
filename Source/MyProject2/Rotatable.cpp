@@ -8,14 +8,14 @@
 ARotatable::ARotatable()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	//PrimaryActorTick.bCanEverTick = true;
 
-	RotatableMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RotatableMesh"));
+	//	RotatableMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RotatableMesh"));
 
-	AnimTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("AnimationTrigger"));
-	AnimTrigger->bGenerateOverlapEvents = true;
-	AnimTrigger->OnComponentBeginOverlap.AddDynamic(this, &ARotatable::OnAnimTriggered);
-	AnimTrigger->AttachToComponent(RotatableMesh, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	//	AnimTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("AnimationTrigger"));
+	//AnimTrigger->bGenerateOverlapEvents = true;
+	//	AnimTrigger->OnComponentBeginOverlap.AddDynamic(this, &ARotatable::OnAnimTriggered);
+	//	AnimTrigger->AttachToComponent(RotatableMesh, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 
 }
@@ -23,61 +23,61 @@ ARotatable::ARotatable()
 // Called when the game starts or when spawned
 void ARotatable::BeginPlay()
 {
-	Super::BeginPlay();
+	//Super::BeginPlay();
 
-	if (AnimCurve) {
+	//	if (AnimCurve) {
 
-		FOnTimelineFloat ProgressFunction;
+	//	FOnTimelineFloat ProgressFunction;
 
-		ProgressFunction.BindUFunction(this, FName("HandleProgress"));
+	//	ProgressFunction.BindUFunction(this, FName("HandleProgress"));
 
-		MyTimeline.AddInterpFloat(AnimCurve, ProgressFunction);
-		MyTimeline.SetLooping(false);
+	//	MyTimeline.AddInterpFloat(AnimCurve, ProgressFunction);
+	//	MyTimeline.SetLooping(false);
 
-		ActorInitialRotation = TargetRotation = GetActorRotation();
-
-
-
-		if (RotationAxis == "Yaw") {
-
-			TargetRotation.Yaw += MaxRotation;
-
-		}
-
-		else if (RotationAxis == "Pitch") {
-			TargetRotation.Pitch += MaxRotation;
+	//	ActorInitialRotation = TargetRotation = GetActorRotation();
 
 
-		}
-		else if (RotationAxis == "Roll") {
 
-			TargetRotation.Roll += MaxRotation;
+	//if (RotationAxis == "Yaw") {
 
-		}
-	}
+	//	TargetRotation.Yaw += MaxRotation;
+
+	//}
+
+	//else if (RotationAxis == "Pitch") {
+	//	TargetRotation.Pitch += MaxRotation;
+
+
+	//}
+	//else if (RotationAxis == "Roll") {
+
+	//TargetRotation.Roll += MaxRotation;
+
+	//	}
+	//}
 }
 
 // Called every frame
 void ARotatable::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
+	//Super::Tick(DeltaTime);
 
-	MyTimeline.TickTimeline(DeltaTime);
+	//MyTimeline.TickTimeline(DeltaTime);
 
 }
 
 void ARotatable::HandleProgress(float Value)
 {
 
-	FRotator NewRotation = FMath::Lerp(ActorInitialRotation, TargetRotation, Value);
-	SetActorRotation(NewRotation);
+	//FRotator NewRotation = FMath::Lerp(ActorInitialRotation, TargetRotation, Value);
+	//SetActorRotation(NewRotation);
 }
 
 void ARotatable::OnAnimTriggered(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
 
-	if (!MyTimeline.IsPlaying()) {
-		MyTimeline.PlayFromStart();
+	//if (!MyTimeline.IsPlaying()) {
+	//	MyTimeline.PlayFromStart();
 
-	}
+	//}
 }

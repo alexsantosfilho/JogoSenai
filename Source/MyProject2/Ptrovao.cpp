@@ -26,15 +26,15 @@ APtrovao::APtrovao()
 	MeshComp->SetWorldScale3D(FVector(100.0f, 100.5f, 100.5f));
 	MeshComp->AttachTo(RootComponent);
 
-	Particle = CreateDefaultSubobject<UParticleSystemComponent>
-		(TEXT("Particle"));
-	Particle->bAutoActivate = true;
-	static ConstructorHelpers::FObjectFinder<UParticleSystem>
-		ParticleSystem(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Mobile/Lightning/P_LineToPoint_Blast_Lightning_00.P_LineToPoint_Blast_Lightning_00'"));
-	if (ParticleSystem.Succeeded()) {
-		Particle->SetTemplate(ParticleSystem.Object);
-	}
-	Particle->SetupAttachment(RootComponent);
+	//Particle = CreateDefaultSubobject<UParticleSystemComponent>
+	//	(TEXT("Particle"));
+//	Particle->bAutoActivate = true;
+	//static ConstructorHelpers::FObjectFinder<UParticleSystem>
+	//	ParticleSystem(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Mobile/Lightning/P_LineToPoint_Blast_Lightning_00.P_LineToPoint_Blast_Lightning_00'"));
+//	if (ParticleSystem.Succeeded()) {
+//		Particle->SetTemplate(ParticleSystem.Object);
+//	}
+//	Particle->SetupAttachment(RootComponent);
 	//Particle->ToggleActive();
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
